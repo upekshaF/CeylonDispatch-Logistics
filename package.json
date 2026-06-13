@@ -1,0 +1,24 @@
+{
+  "name": "logistics-app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "COMP70006 Assessment 2 — Logistics Shipment Tracking & Delivery Management System",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n gateway,auth,shipments,routes,notifications,web -c blue,green,magenta,yellow,cyan,white \"npm:dev -w gateway\" \"npm:dev -w auth-service\" \"npm:dev -w shipments-service\" \"npm:dev -w routes-service\" \"npm:dev -w notifications-service\" \"npm:dev -w web\"",
+    "dev:services": "concurrently -n gateway,auth,shipments,routes,notifications -c blue,green,magenta,yellow,cyan \"npm:dev -w gateway\" \"npm:dev -w auth-service\" \"npm:dev -w shipments-service\" \"npm:dev -w routes-service\" \"npm:dev -w notifications-service\"",
+    "dev:web": "npm run dev -w web",
+    "reset": "rm -f packages/*/*.db packages/*/*.db-shm packages/*/*.db-wal",
+    "test": "npm test --workspaces --if-present",
+    "typecheck": "tsc -p tsconfig.base.json --noEmit",
+    "lint": "eslint . --ext .ts,.tsx"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "concurrently": "^8.2.2",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}
